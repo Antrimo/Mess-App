@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mess/Resources/theme.dart';
+import 'package:mess/Screens/breakfast.dart';
+import 'package:mess/Screens/dinner.dart';
+import 'package:mess/Screens/lunch.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Mess extends StatefulWidget {
@@ -10,8 +13,6 @@ class Mess extends StatefulWidget {
 }
 
 class _MessState extends State<Mess> {
-  final List<String> mealTabs = ['Breakfast', 'Lunch', 'Dinner'];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,31 +40,80 @@ class _MessState extends State<Mess> {
               //print("Page changed to $focusedDay");
             },
           ),
-          DefaultTabController(
-            length: mealTabs.length,
+          Container(
+            decoration: BoxDecoration(
+              color: secondaryColor,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Text(
+                'Today\'s Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+          ),
+          const DefaultTabController(
+            length: 3,
             child: Expanded(
               child: Column(
                 children: [
-                  TabBar(
-                    tabs: mealTabs
-                        .map((meal) => Tab(
-                              text: meal,
-                            ))
-                        .toList(),
-                  ),
+                  TabBar(tabs: [
+                    Tab(
+                      child: Text(
+                        'Breakfast',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Cursive",
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Lunch',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Cursive",
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Snacks',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Cursive",
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Dinner',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Cursive",
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  ]),
                   Expanded(
                     child: TabBarView(
-                      children: mealTabs.map((meal) {
-                        return const Tab(
-                          child: Center(
-                            child: Placeholder(
-                              color: Colors.green,
-                              fallbackHeight: 200,
-                              fallbackWidth: 200,
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                      children: [
+                        Breakfast(),
+                        Lunch(),
+                        Dinner(),
+                      ],
                     ),
                   ),
                 ],
