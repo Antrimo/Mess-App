@@ -13,6 +13,12 @@ class Mess extends StatefulWidget {
 }
 
 class _MessState extends State<Mess> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
+  DateTime now = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +38,30 @@ class _MessState extends State<Mess> {
       body: Column(
         children: [
           TableCalendar(
-            firstDay: DateTime.utc(2024, 1, 1),
-            lastDay: DateTime.utc(2030, 3, 14),
+            firstDay: DateTime.now(),
+            lastDay: DateTime.utc(now.year, now.month + 1, 0),
             focusedDay: DateTime.now(),
             calendarFormat: CalendarFormat.month,
+            selectedDayPredicate: (day) {
+              return isSameDay(_selectedDay, day);
+            },
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+            },
+            onFormatChanged: (format) {
+              if (_calendarFormat != format) {
+                // Call `setState()` when updating calendar format
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+            },
             onPageChanged: (focusedDay) {
-              //print("Page changed to $focusedDay");
+              // No need to call `setState()` here
+              _focusedDay = focusedDay;
             },
           ),
           Container(
@@ -88,16 +112,6 @@ class _MessState extends State<Mess> {
                     ),
                     Tab(
                       child: Text(
-                        'Snacks',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Cursive",
-                          fontSize: 24,
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
                         'Dinner',
                         style: TextStyle(
                           color: Colors.black,
@@ -124,4 +138,10 @@ class _MessState extends State<Mess> {
       ),
     );
   }
+}
+
+bool isSameDay(DateTime? selectedDay, DateTime dayToCheck) {
+  return selectedDay?.year == dayToCheck.year &&
+      selectedDay?.month == dayToCheck.month &&
+      selectedDay?.day == dayToCheck.day;
 }
