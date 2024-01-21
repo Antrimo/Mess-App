@@ -38,6 +38,8 @@ class _MessState extends State<Mess> {
       body: Column(
         children: [
           TableCalendar(
+            weekNumbersVisible: false,
+            rowHeight: 40.0,
             firstDay: DateTime.now(),
             lastDay: DateTime.utc(now.year, now.month + 1, 0),
             focusedDay: DateTime.now(),
@@ -53,7 +55,6 @@ class _MessState extends State<Mess> {
             },
             onFormatChanged: (format) {
               if (_calendarFormat != format) {
-                // Call `setState()` when updating calendar format
                 setState(() {
                   _calendarFormat = format;
                 });

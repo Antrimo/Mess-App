@@ -8,32 +8,31 @@ class Dinner extends StatefulWidget {
 }
 
 class _DinnerState extends State<Dinner> {
-  List<List<String>> dinnerItems = [
-    ['Eggs', 'Toast'],
-    ['Oatmeal', 'Fruit Salad'],
-    ['Pancakes', 'Smoothie'],
+  List<String> breakfastItems = [
+    "Eggs",
+    "Toast",
+    "Oatmeal",
+    "Fruit Salad",
+    "Pancakes",
+    "Smoothie",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.orange,
       body: Center(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8.0,
-            mainAxisSpacing: 8.0,
-          ),
-          itemCount: dinnerItems.length * 2, // Adjust as needed
+        child: ListView.builder(
+          itemCount: breakfastItems.length,
           itemBuilder: (BuildContext context, int index) {
-            int row = index ~/ 2;
-            int col = index % 2;
-
-            return Card(
-              child: Center(
-                child: Text(
-                  dinnerItems[row][col],
-                  style: const TextStyle(fontSize: 18.0),
+            return SizedBox(
+              height: 50,
+              child: Card(
+                child: Center(
+                  child: Text(
+                    breakfastItems[index],
+                    style: const TextStyle(fontSize: 18.0),
+                  ),
                 ),
               ),
             );

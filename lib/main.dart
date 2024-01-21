@@ -30,33 +30,32 @@ class _MyAppState extends State<MyApp> {
         body: pages[currentPage],
         bottomNavigationBar: Container(
           color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GNav(
-              backgroundColor: Colors.green,
-              gap: 8,
-              activeColor: Colors.black,
-              color: Colors.white,
-              iconSize: 24,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              duration: const Duration(milliseconds: 800),
-              tabs: const [
-                GButton(
-                  icon: Icons.home,
-                  iconSize: 30.0,
-                ),
-                GButton(
-                  icon: Icons.people,
-                  iconSize: 30.0,
-                ),
-              ],
-              selectedIndex: currentPage,
-              onTabChange: (index) {
-                setState(() {
-                  currentPage = index;
-                });
-              },
-            ),
+          child: GNav(
+            backgroundColor: Colors.green,
+            gap: 8,
+            activeColor: Colors.black,
+            color: Colors.white,
+            iconSize: 24,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            duration: const Duration(milliseconds: 800),
+            tabs: const [
+              GButton(
+                margin: EdgeInsets.only(left: 50.0),
+                icon: Icons.home,
+                iconSize: 30.0,
+              ),
+              GButton(
+                margin: EdgeInsets.only(right: 50.0),
+                icon: Icons.people,
+                iconSize: 30.0,
+              ),
+            ],
+            selectedIndex: currentPage,
+            onTabChange: (index) {
+              setState(() {
+                currentPage = index;
+              });
+            },
           ),
         ),
       ),
