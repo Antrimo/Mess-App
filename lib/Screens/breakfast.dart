@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mess/values.dart';
 
 class Breakfast extends StatefulWidget {
   const Breakfast({
@@ -10,15 +11,6 @@ class Breakfast extends StatefulWidget {
 }
 
 class _BreakfastState extends State<Breakfast> {
-  List<String> breakfastItems = [
-    "Eggs",
-    "Toast",
-    "Oatmeal",
-    "Fruit Salad",
-    "Pancakes",
-    "Smoothie",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +20,9 @@ class _BreakfastState extends State<Breakfast> {
           itemCount: breakfastItems.length,
           itemBuilder: (BuildContext context, int index) {
             return SizedBox(
-              height: 50,
+              height: 60,
               child: Card(
+                elevation: 10.0,
                 child: Center(
                   child: Text(
                     breakfastItems[index],

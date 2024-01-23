@@ -3,6 +3,7 @@ import 'package:mess/Resources/theme.dart';
 import 'package:mess/Screens/breakfast.dart';
 import 'package:mess/Screens/dinner.dart';
 import 'package:mess/Screens/lunch.dart';
+import 'package:mess/Screens/profile.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Mess extends StatefulWidget {
@@ -13,7 +14,7 @@ class Mess extends StatefulWidget {
 }
 
 class _MessState extends State<Mess> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  //final CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
@@ -34,12 +35,23 @@ class _MessState extends State<Mess> {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
           TableCalendar(
-            weekNumbersVisible: false,
-            rowHeight: 40.0,
+            headerVisible: false,
+            rowHeight: 50.0,
             firstDay: DateTime.now(),
             lastDay: DateTime.utc(now.year, now.month + 1, 0),
             focusedDay: DateTime.now(),
@@ -53,37 +65,6 @@ class _MessState extends State<Mess> {
                 _focusedDay = focusedDay;
               });
             },
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              // No need to call `setState()` here
-              _focusedDay = focusedDay;
-            },
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: secondaryColor,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
-              ),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: Text(
-                'Today\'s Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
           ),
           const DefaultTabController(
             length: 3,
