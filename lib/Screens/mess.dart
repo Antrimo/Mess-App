@@ -24,7 +24,8 @@ class _MessState extends State<Mess> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        //elevation: 10.0,
+        backgroundColor: Colors.green[500],
         title: const Center(
           child: Text(
             'JUIT Mess',
