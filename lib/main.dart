@@ -61,6 +61,22 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.black,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
+              child: const Padding(
+                padding: EdgeInsets.only(
+                  left: 40,
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    SizedBox(width: 60),
+                    Icon(Icons.lock_clock_rounded, color: Colors.white),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
