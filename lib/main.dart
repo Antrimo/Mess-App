@@ -46,9 +46,9 @@ class _MyAppState extends State<MyApp> {
                 enableInfiniteScroll: false,
               ),
               items: [
-                buildMenuCard("Breakfast", breakfastMenu),
-                buildMenuCard("Lunch", lunchMenu),
-                buildMenuCard("Dinner", dinnerMenu),
+                buildMenuCard("Breakfast", breakfastMenu, 0),
+                buildMenuCard("Lunch", lunchMenu, 1),
+                buildMenuCard("Dinner", dinnerMenu, 2),
               ],
             ),
             const SizedBox(
@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget buildMenuCard(String mealType, List<String> menuItems) {
+  Widget buildMenuCard(String mealType, List<String> menuItems, int index) {
     return Center(
       child: Container(
         width: 300.0,
@@ -92,30 +92,45 @@ class _MyAppState extends State<MyApp> {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Text(
-              mealType,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            Positioned(
+              top: 0,
+              child: Image.asset(
+                foodImages[index],
+                width: 160.0,
+                height: 100.0,
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 10),
             Column(
-              children: menuItems
-                  .map((item) => ListTile(
-                        title: Text(
-                          item,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ))
-                  .toList(),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50), // Adjust this value for spacing
+                Text(
+                  mealType,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Column(
+                  children: menuItems
+                      .map((item) => ListTile(
+                            title: Text(
+                              item,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                ),
+              ],
             ),
           ],
         ),

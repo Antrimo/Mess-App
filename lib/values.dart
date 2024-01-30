@@ -12,3 +12,9 @@ List<String> dinnerMenu = [
   "Green Beans",
   "Red Wine"
 ];
+
+List<String> foodImages = [
+  "assets/breakfast.png",
+  "assets/lunch.png",
+  "assets/dinner.png"
+];
