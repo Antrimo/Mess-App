@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:mess/Resources/theme.dart';
+import 'package:mess/time.dart';
 import 'package:mess/values.dart';
 
 void main() {
@@ -61,19 +62,30 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.black,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
-              child: const Padding(
-                padding: EdgeInsets.only(
+              child: Padding(
+                padding: const EdgeInsets.only(
                   left: 40,
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.home,
                       color: Colors.white,
                       size: 30.0,
                     ),
-                    SizedBox(width: 60),
-                    Icon(Icons.lock_clock_rounded, color: Colors.white),
+                    const SizedBox(width: 60),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Time()));
+                      },
+                      child: const Icon(
+                        Icons.lock_clock_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -92,45 +104,36 @@ class _MyAppState extends State<MyApp> {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
-        child: Stack(
-          alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Positioned(
-              top: 0,
-              child: Image.asset(
-                foodImages[index],
-                width: 160.0,
-                height: 100.0,
-                fit: BoxFit.cover,
+            Image.asset(
+              foodImages[index],
+              width: 160.0,
+              height: 100.0,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              mealType,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 10),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50), // Adjust this value for spacing
-                Text(
-                  mealType,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  children: menuItems
-                      .map((item) => ListTile(
-                            title: Text(
-                              item,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                ),
-              ],
+              children: menuItems
+                  .map((item) => ListTile(
+                        title: Text(
+                          item,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ))
+                  .toList(),
             ),
           ],
         ),
